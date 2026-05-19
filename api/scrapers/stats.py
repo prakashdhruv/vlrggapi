@@ -38,7 +38,18 @@ def _parse_stats_row(item) -> dict:
             continue
         agents.append(src.split("/")[-1].split(".")[0])
 
+    player_id = ""
+    if player_cell:
+        player_link = player_cell.css_first("a")
+        if player_link:
+            href = player_link.attributes.get("href", "")
+            if href:
+                parts = [p for p in href.split("/") if p]
+                if len(parts) >= 2 and parts[0] == "player":
+                    player_id = parts[1]
+
     return {
+        "id": player_id,
         "player": player_name,
         "org": org,
         "agents": agents,

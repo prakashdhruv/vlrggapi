@@ -115,6 +115,15 @@ async def vlr_rankings(region_key):
             rank = _normalize_text(item.css_first("div.rank-item-rank-num").text())
             team = _extract_ranked_team_name(item)
             team_link = item.css_first("a.rank-item-team")
+            
+            team_id = ""
+            if team_link:
+                href = team_link.attributes.get("href", "")
+                if href:
+                    parts = [p for p in href.split("/") if p]
+                    if len(parts) >= 2 and parts[0] == "team":
+                        team_id = parts[1]
+
             team_logo = team_link.css_first("img") if team_link else None
             logo = team_logo.attributes.get("src", "") if team_logo else ""
             logo = re.sub(r"/img/vlr/tmp/vlr.png", "", logo)
@@ -125,6 +134,7 @@ async def vlr_rankings(region_key):
 
             result.append(
                 {
+                    "id": team_id,
                     "rank": rank,
                     "team": team,
                     "country": country,
