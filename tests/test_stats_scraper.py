@@ -10,7 +10,7 @@ STATS_HTML = """
     <tbody>
       <tr>
         <td class="mod-player mod-a">
-          <a>
+          <a href="/player/123/tenz">
             <div class="text-of">TenZ Prime</div>
             <div class="stats-player-country">Team Liquid</div>
           </a>
@@ -60,6 +60,7 @@ def test_parse_stats_row_uses_structured_player_and_org_selectors():
     row = HTMLParser(STATS_HTML).css_first("tbody tr")
 
     assert _parse_stats_row(row) == {
+        "id": "123",
         "player": "TenZ Prime",
         "org": "Team Liquid",
         "agents": ["jett", "omen"],
@@ -93,6 +94,7 @@ async def test_vlr_stats_preserves_output_shape_with_structured_row_parsing(monk
             "status": 200,
             "segments": [
                 {
+                    "id": "123",
                     "player": "TenZ Prime",
                     "org": "Team Liquid",
                     "agents": ["jett", "omen"],

@@ -89,6 +89,7 @@ async def test_vlr_rankings_preserves_current_output_shape(monkeypatch):
             "status": 200,
             "segments": [
                 {
+                    "id": "1034",
                     "rank": "1",
                     "team": "NRG",
                     "country": "United States",

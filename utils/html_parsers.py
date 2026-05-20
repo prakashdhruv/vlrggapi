@@ -1,8 +1,9 @@
 """
 Common HTML parsing utilities for VLR.GG scrapers
 """
+from __future__ import annotations
 import re
-from datetime import UTC, datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from urllib.parse import urlparse
 from zoneinfo import ZoneInfo
 
@@ -226,7 +227,7 @@ def combine_date_and_time(date_str: str, time_text: str) -> str:
         return ""
 
     local_dt = datetime.combine(parsed_date, parsed_time, tzinfo=eastern)
-    utc_dt = local_dt.astimezone(UTC)
+    utc_dt = local_dt.astimezone(timezone.utc)
     return utc_dt.strftime("%Y-%m-%d %H:%M:%S")
 
 
@@ -245,7 +246,7 @@ def parse_match_timestamp(item, date_str: str) -> str:
         if unix_ts:
             try:
                 return datetime.fromtimestamp(
-                    int(unix_ts), tz=UTC
+                    int(unix_ts), tz=timezone.utc
                 ).strftime("%Y-%m-%d %H:%M:%S")
             except (ValueError, OSError):
                 pass
@@ -255,7 +256,7 @@ def parse_match_timestamp(item, date_str: str) -> str:
     if eta_elem:
         delta = parse_eta_to_timedelta(eta_elem.text())
         if delta is not None:
-            utc_dt = datetime.now(UTC) + delta
+            utc_dt = datetime.now(timezone.utc) + delta
             return utc_dt.strftime("%Y-%m-%d %H:%M:%S")
 
     # Strategy 3: date header + match time

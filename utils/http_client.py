@@ -1,10 +1,11 @@
 """
 Async HTTP client singleton using httpx.
 """
+from __future__ import annotations
 import asyncio
 import logging
 import time
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
 from urllib.parse import urlparse
 
@@ -97,7 +98,7 @@ def _parse_retry_after(response: httpx.Response) -> float | None:
         pass
     try:
         dt = parsedate_to_datetime(value)
-        delta = (dt - datetime.now(tz=UTC)).total_seconds()
+        delta = (dt - datetime.now(tz=timezone.utc)).total_seconds()
         return max(0.0, delta)
     except Exception:
         return None

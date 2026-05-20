@@ -1,3 +1,4 @@
+from __future__ import annotations
 """Tests for utility modules: pagination, html_parsers, error_handling, cache_manager."""
 import asyncio
 from datetime import timedelta

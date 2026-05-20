@@ -1,6 +1,7 @@
 """
 Error handling utilities for VLR.GG API
 """
+from __future__ import annotations
 import asyncio
 import logging
 from functools import wraps

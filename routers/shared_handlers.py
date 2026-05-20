@@ -1,6 +1,7 @@
 """
 Shared endpoint handler logic used by both legacy and V2 routers.
 """
+from __future__ import annotations
 from fastapi import HTTPException
 
 from api.scrapers import (

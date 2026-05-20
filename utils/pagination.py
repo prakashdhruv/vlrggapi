@@ -1,6 +1,7 @@
 """
 Shared pagination and retry logic for multi-page scrapers.
 """
+from __future__ import annotations
 import asyncio
 import logging
 from collections.abc import Callable

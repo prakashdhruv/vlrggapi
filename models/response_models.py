@@ -1,6 +1,7 @@
 """
 Pydantic response models used by active API routes.
 """
+from __future__ import annotations
 from typing import Any
 
 from pydantic import BaseModel

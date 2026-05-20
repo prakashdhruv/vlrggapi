@@ -2,6 +2,7 @@
 Scraper for individual VLR.GG match detail pages.
 Fetches the base match page plus performance and economy tabs concurrently.
 """
+from __future__ import annotations
 import asyncio
 import logging
 import re

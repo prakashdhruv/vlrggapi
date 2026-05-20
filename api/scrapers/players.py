@@ -1,6 +1,7 @@
 """
 Scraper for VLR.GG player profile and match history pages.
 """
+from __future__ import annotations
 import logging
 import re
 

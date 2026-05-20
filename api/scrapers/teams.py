@@ -6,6 +6,7 @@ Provides three async scraper functions:
   - vlr_team_matches: paginated match history for a team
   - vlr_team_transactions: roster transaction log for a team
 """
+from __future__ import annotations
 import logging
 import re
 
